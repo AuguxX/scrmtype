@@ -7,9 +7,9 @@ let scrims = {}
 // access: 0 = everyone; access: 1 = moderators; access: 2 = administrators;
 exports.commands = {
 	// everyone
-	help:{access:0,desc:"Comandos Disponibles"},
-	host:{access:2,desc:"Comenzar scrim"},
-	setup:{access:3,desc:"Configuracion [BETA]"},
+	help:{access:0,desc:"Cmd"},
+	host:{access:2,desc:"start"},
+	setup:{access:3,desc:"Configuration"},
 };
 
 exports.newGuild = function(guild){
@@ -61,7 +61,7 @@ exports.getData = function(guild){
 }
 
 exports.one = function(val) {
-	if (val == 0) return "**Ahora!**"; else return val+" **minutos**";
+	if (val == 0) return "**now!**"; else return val+" **minutes**";
 }
 
 exports.startScrim = function(guild,host,type,time){
@@ -85,14 +85,14 @@ exports.startScrim = function(guild,host,type,time){
 							channel2.leave();
 							const embed2 = new RichEmbed()
 								.setColor(0xc1d9ff)
-								.addField("Introduce los ultimos 3 digitos de lobby","Puedes encontrarlos en la esquina superior izquierda de la pantalla!",false)
+								.addField("put the 3 digit code","found at up teft corner of the screen!",false)
 							channel.send(embed2)
 							scrims[guild.id].codes = true;
 							scrims[guild.id].codedata = {}
 							scrims[guild.id].playerinterval = setInterval(function(){
 								const embed4 = new RichEmbed()
 									.setColor(0xc1d9ff)
-									.setTitle("mensaje 1")
+									.setTitle("lobbies")
 								Object.keys(scrims[guild.id].codedata).forEach(function(key){
 									let codeobj = scrims[guild.id].codedata[key];
 									let user_str = "";
@@ -100,11 +100,11 @@ exports.startScrim = function(guild,host,type,time){
 										let user = scrims[guild.id].codedata[key][key2];
 										user_str = user_str+user+"\n"
 										if (count >= 15) {
-											if (count > 15) user_str = user_str+"que es esto";
+											if (count > 15) user_str = user_str+"and more";
 											return false;
 										};
 									})
-									embed4.addField(key+" ("+Object.keys(codeobj).length+" jugadore msg1)",user_str,true)
+									embed4.addField(key+" ("+Object.keys(codeobj).length+" players)",user_str,true)
 								})
 								channel.send(embed4)
 								// .then(m => m.edit('boop'));
@@ -114,7 +114,7 @@ exports.startScrim = function(guild,host,type,time){
 								clearInterval(scrims[guild.id].playerinterval)
 								const embed3 = new RichEmbed()
 									.setColor(0xc1d9ff)
-									.setTitle("mensaje2")
+									.setTitle("lobbies")
 								Object.keys(scrims[guild.id].codedata).forEach(function(key){
 									let codeobj = scrims[guild.id].codedata[key];
 									let user_str = "";
@@ -122,7 +122,7 @@ exports.startScrim = function(guild,host,type,time){
 										let user = scrims[guild.id].codedata[key][key2];
 										user_str = user_str+user+"\n"
 										if (count >= 15) {
-											if (count > 15) user_str = user_str+"y mas..";
+											if (count > 15) user_str = user_str+"and more";
 											return false;
 										};
 									})
